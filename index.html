@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: lightblue;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      #container {
+        width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: white;
+        border: 2px solid black;
+      }
+
+      #input {
+        width: 100px;
+        margin: 10px;
+      }
+
+      #output {
+        width: 100px;
+        margin: 10px;
+        color: green;
+      }
+
+      #convert {
+        width: 100px;
+        margin: 10px;
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Temperature Converter</h1>
+    <div id="container">
+      <p>
+        Enter a temperature in Celsius or Fahrenheit and click the convert
+        button to see the equivalent temperature in the other unit.
+      </p>
+      <input id="input" type="number" placeholder="Enter temperature" />
+      <select id="unit">
+        <option value="C">Celsius</option>
+        <option value="F">Fahrenheit</option>
+      </select>
+      <button id="convert">Convert</button>
+      <p>The converted temperature is:</p>
+      <output id="output"></output>
+    </div>
+    <script>
+      // Get the elements from the document
+      var input = document.getElementById("input");
+      var unit = document.getElementById("unit");
+      var convert = document.getElementById("convert");
+      var output = document.getElementById("output");
+
+      // Define a function to convert the temperature
+      function convertTemp() {
+        // Get the input value and unit
+        var inputValue = input.value;
+        var inputUnit = unit.value;
+
+        // Declare a variable to store the output value
+        var outputValue;
+
+        // Check if the input is valid
+        if (inputValue == "" || isNaN(inputValue)) {
+          // Display an error message
+          output.value = "Invalid input";
+        } else {
+          // Convert the input to a number
+          inputValue = Number(inputValue);
+
+          // Check the input unit and apply the conversion formula
+          if (inputUnit == "C") {
+            // Convert from Celsius to Fahrenheit
+            outputValue = (inputValue * 9) / 5 + 32;
+          } else {
+            // Convert from Fahrenheit to Celsius
+            outputValue = ((inputValue - 32) * 5) / 9;
+          }
+
+          // Round the output value to two decimal places
+          outputValue = outputValue.toFixed(2);
+
+          // Display the output value
+          output.value = outputValue;
+        }
+      }
+
+      // Add an event listener to the convert button
+      convert.addEventListener("click", convertTemp);
+    </script>
+  </body>
+</html>
